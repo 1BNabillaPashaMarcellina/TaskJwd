@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kalkulator</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="calculator">
+        <h2>Kalkulator</h2>
+        <form method="post">
+            <input type="number" name="num1" placeholder="Angka pertama" required>
+            <select name="operator">
+                <option value="penjumlahan">+</option>
+                <option value="pengurangan">-</option>
+                <option value="pembagian">/</option>
+                <option value="perkalian">*</option>
+            </select>
+            <input type="number" name="num2" placeholder="Angka kedua" required>
+            <button type="submit" name="calculate">Hitung</button>
+        </form>
+
+        <?php
+        if (isset($_POST['calculate'])) {
+            $num1 = $_POST['num1'];
+            $num2 = $_POST['num2'];
+            $operator = $_POST['operator'];
+
+            switch ($operator) {
+                case 'penjumlahan':
+                    $result = $num1 + $num2;
+                    break;
+                case 'pengurangan':
+                    $result = $num1 - $num2;
+                    break;
+                case 'pembagian':
+                    if ($num2 != 0) {
+                        $result = $num1 / $num2;
+                    } else {
+                        $result = 'Tidak dapat membagi dengan 0';
+                    }
+                    break;
+                case 'perkalian':
+                    $result = $num1 * $num2;
+                    break;
+                default:
+                    $result = 'Operasi tidak valid';
+            }
+            echo "<p>Hasil: $result</p>";
+        }
+        ?>
+    </div>
+</body>
+</html>
+
+
